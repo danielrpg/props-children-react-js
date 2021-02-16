@@ -5,15 +5,32 @@ class Button extends Component {
         super(props)
 
         this.state = {
-            label: null,
+            label: this.props.name,
             id: this.props.id
         }
     }
 
+    buttonLabel(src) {
+        console.log(src)
+        src.includes('200x100')
+        ? this.setState({label:'Small'})
+        : this.setState({label:'Big'})
+
+    }
+
+    componentDidMount() {
+        console.log('--> componentDidMount')
+        this.buttonLabel(this.props.pictureSrc)
+    }
+
     render() {
+        console.log('----->button render')
         return(
-            <button style={{border:'1px solid #00186f', padding: 10, backgroundColor:'#2f3e9e', color:'#ffffff'}}>
-                {this.props.id === 1 || this.props.id === 2? "Small": "Big"} 
+            <button 
+                style={{border:'1px solid #00186f', padding: 10, backgroundColor:'#2f3e9e', color:'#ffffff'}}
+                onClick={() => this.props.setCurrentIdPicture(this.props.id)}
+            >
+                {this.state.label}
             </button>
         )
     }
